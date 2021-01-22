@@ -10,7 +10,7 @@ module.exports = {
         
     },
 
-    auth :{
+    auth : {
 
         SECRET : process.env._SECRET,
         

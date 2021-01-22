@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 
 class Authservice{
 
-    #generateToken(user){
+    generateToken(user){
         const data = {
             _id : user.ID,
             name : user.username,

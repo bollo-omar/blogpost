@@ -1,16 +1,13 @@
 import  mongoose from 'mongoose';
 
-const pwd = process.env._PASSWORD;
-const uri = "mongodb+srv://user_001:"+pwd+"@blogpost-east.5bgod.mongodb.net/BlogDB?retryWrites=true&w=majority";
-
 const initDBServer = async ()=>{
 
     try{
-        await mongoose.connect(uri,{
+        await mongoose.connect(process.env._DBURI,{
             useNewUrlParser : true,
             useUnifiedTopology: true
         });
-        console.log({message:"DB connected successfully"});
+        console.log({message:"DB connected successfully..."});
     }
     catch(err){
         

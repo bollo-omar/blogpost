@@ -10,7 +10,7 @@ class UserService{
             username,
             email,
             password
-        }).
+        });
 
         return userData;
 
