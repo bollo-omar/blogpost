@@ -1,6 +1,7 @@
 import * as express from 'express'
 import CORS from 'cors';
 import initDBServer from './db';
+import router from '../routes/authRoutes';
 //import router from '../Routes/accounts.route';
 
 module.exports = (app)=>{
@@ -10,10 +11,12 @@ module.exports = (app)=>{
     app.use(express.urlencoded({extended : true}));
     app.use(express.json());
     app.use(CORS());
+    app.use(router);
 
    /* app.use((err, req, res, next)=>{
 
         if (typeof (err) === 'string') {
+            
            
             res.status(400).json({ message: err });
         }
