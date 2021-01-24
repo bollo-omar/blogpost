@@ -16,28 +16,22 @@ const PostSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
     },
-    Comments : {
+    Comments : [{
         comment : String,
         commentedAt : Date,
         postedBy : {
             type : mongoose.Schema.Types.ObjectId,
             ref : 'User'
-        },
-        likeCounter : {
-            counter : Number,
-            likedBy : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : 'User'
-            }
         }
-    },
-    likeCounter : {
+    }],
+    likeCounter : [{
         counter : Number,
+        default : 0,
         likedBy : {
             type : mongoose.Schema.Types.ObjectId,
             ref : 'User'
         }
-    }
+    }]
 });
 
 const PostModel = mongoose.model('Post',PostSchema);

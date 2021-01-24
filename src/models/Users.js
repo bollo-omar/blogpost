@@ -1,10 +1,18 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
+    firstname : {
+        type : String,
+        required : true,
+        trim : 1
+    },
+    lastname : {
+        type : String,
+        required : true,
+        trim : 1
+    },
     username : {
         type: String,
         required : true,
@@ -18,22 +26,26 @@ const UserSchema = new Schema({
         trim : true
     },
     hash : {
-        type: String
+        type: String,
+        required : true
     },
-    password : {
+    salt : {
         type : String,
         required : true
     },
     userID : {
         type : Schema.ObjectId,
         auto : true
-    }
+    },
+    createdAt : Date,
+    updatedAt : Date
 });
 
 UserSchema.pre('save',function(next){
-    if(this.password && this.isModified('password')){
-        this.password = bcrypt.hash(this.password, 10);
-    }
+   
+    this.updatedAt = Date.now();
+
+    if(!this.createdAt)this.createdAt=Date.now();
     next();
 });
 
