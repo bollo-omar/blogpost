@@ -75,14 +75,12 @@ class Authservice{
     async changePassword(token,password){
         
         try{
-            const user = jwt.verify(token, process.env._SIGNATURE);            
-            const _id = user._id;
-        
-            await UserModel.findOneAndUpdate(
-                {_id},
-                {
-                    ...hasher(password)
-                },
+            const user = jwt.verify(token, process.env._SIGNATURE); 
+            
+            const filter = {userID : user._id};
+            const update = {...hasher(password)}
+            
+            await UserModel.findOneAndUpdate(filter,update,
                 {new : true},(err,_user)=>{
                     if(err) return{status : 'errow', error : err.message};
 
