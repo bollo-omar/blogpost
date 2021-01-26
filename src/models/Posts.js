@@ -3,37 +3,35 @@ import mongoose from 'mongoose';
 const PostSchema = new mongoose.Schema({
     title : {
         type : String,
-        required : true,
-        trim : 1
+        required : true
     },
-    postedAt : Date,
-    postBody : {
-        type : String,
-        required : true,
-        trim : 1
+    content : {
+        type :String,
+        required : true
     },
-    postedBy : {
+    createdAt : Date,
+    updatedAt : Date,
+    user : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'User'
+        ref : 'User' 
     },
-    Comments : [{
-        comment : String,
-        commentedAt : Date,
-        postedBy : {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : 'User'
-        }
-    }],
     likeCounter : [{
-        counter : Number,
-        default : 0,
-        likedBy : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Like'
+    }],       
+    comments : [
+        {
             type : mongoose.Schema.Types.ObjectId,
-            ref : 'User'
+            ref : Comment
         }
-    }]
+    ]
 });
 
-const PostModel = mongoose.model('Post',PostSchema);
+PostSchema.pre('save', function(){
+    this.updatedAt = Date.now();
 
-module.exports = PostModel;
+    if(!this.createdAt)this.createdAt=Date.now();
+    next();
+});
+
+const Post = mongoose.model('Post',PostSchema);

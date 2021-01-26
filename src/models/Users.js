@@ -38,7 +38,25 @@ const UserSchema = new Schema({
         auto : true
     },
     createdAt : Date,
-    updatedAt : Date
+    updatedAt : Date,
+    post : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Post'
+        }
+    ],
+    like : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Like'
+        }
+    ],
+    comment : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Comment'
+        }
+    ]
 });
 
 UserSchema.pre('save',function(next){

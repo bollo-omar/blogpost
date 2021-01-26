@@ -80,12 +80,7 @@ class Authservice{
             const filter = {userID : user._id};
             const update = {...hasher(password)}
             
-            await UserModel.findOneAndUpdate(filter,update,
-                {new : true},(err,_user)=>{
-                    if(err) return{status : 'errow', error : err.message};
-
-                    return {status : 'ok', data : _user}
-                });
+            await UserModel.findOneAndUpdate(filter,update,{new : true});
           
             return {status : 'ok', data : user}
         }
