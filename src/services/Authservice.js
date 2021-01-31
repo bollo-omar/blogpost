@@ -61,7 +61,7 @@ class Authservice{
 
             const token = jwt.sign(
                 {
-                    _id : user.userID,
+                    _id : user._id,
                      username : user.username
                 },
                  process.env._SIGNATURE
@@ -77,7 +77,7 @@ class Authservice{
         try{
             const user = jwt.verify(token, process.env._SIGNATURE); 
             
-            const filter = {userID : user._id};
+            const filter = {_id : user._id};
             const update = {...hasher(password)}
             
             await UserModel.findOneAndUpdate(filter,update,{new : true});

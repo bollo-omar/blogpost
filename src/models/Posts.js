@@ -19,15 +19,15 @@ const PostSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'Like'
     }],       
-    comments : [
+    comment : [
         {
             type : mongoose.Schema.Types.ObjectId,
-            ref : Comment
+            ref : 'Comment'
         }
     ]
 });
 
-PostSchema.pre('save', function(){
+PostSchema.pre('save', function(next){
     this.updatedAt = Date.now();
 
     if(!this.createdAt)this.createdAt=Date.now();
@@ -35,3 +35,5 @@ PostSchema.pre('save', function(){
 });
 
 const Post = mongoose.model('Post',PostSchema);
+
+module.exports = Post;
