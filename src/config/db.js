@@ -19,7 +19,7 @@ const initDBServer = async ()=>{
 
         }else{
 
-            console.log({message : "connection failed, check your configuration or internet connection"});
+            console.log({status: 'error', error : "connection to database failed, check your configuration or internet connection"});
         }
     }
 }
